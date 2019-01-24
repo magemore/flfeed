@@ -3,8 +3,7 @@ header('Content-type: application/atom+xml');
 @unlink('/tmp/freelancer.json');
 @system('QT_QPA_PLATFORM=offscreen phantomjs freelancer.js');
 $a = json_decode(file_get_contents('/tmp/freelancer.json'), true);
-$d = new DateTime();
-$date = $d->format('Y-m-d\TH:i:sP');
+$date = (new DateTime())->format('Y-m-d\TH:i:sP');
 ?><?xml version = "1.0" encoding = "UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://magemore.com/rss.php</id>
