@@ -14,6 +14,8 @@ class Cron extends CI_Controller {
         if (strpos($s, 'india') !== FALSE) return false;
         if (strpos($s, 'mumbai') !== FALSE) return false;
         if (strpos($s, 'c#') !== FALSE) return false;
+        if (strpos($s, '>ended<') !== FALSE) return false;
+        if (strpos($s, '>project in progress<') !== FALSE) return false;
         return true;
     }
     private function getFeedData($name, $filter) {
