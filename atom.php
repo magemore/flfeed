@@ -1,25 +1,5 @@
 <?php
 header('Content-type: application/atom+xml');
-function getFeedData($name, $filter) {
-    @unlink('/tmp/'.$name.'.json');
-    @system('QT_QPA_PLATFORM=offscreen phantomjs '.$name.'.js');
-    $ab =  json_decode(file_get_contents('/tmp/'.$name.'.json'), true);
-    $i = 0;
-    $a=[];
-    foreach ($ab as $d) {
-        $add = true;
-        if ($filter) {
-            $add = strpos($d['title'].' '.$d['html'],$filter)!==FALSE;
-        }
-        if ($add) {
-            $i++;
-            if ($i>3) break;
-            $d['title'] = $name.': ' .$d['title'];
-            $a[]=$d;
-        }
-    }
-    return $a;
-}
 function validateItem($d) {
     $s = strtolower($d['title'].' '.$d['html']);
     if (strpos($s, 'designer') !== FALSE) return false;
@@ -31,10 +11,32 @@ function validateItem($d) {
     if (strpos($s, 'c#') !== FALSE) return false;
     return true;
 }
+function getFeedData($name, $filter) {
+    @unlink('/tmp/'.$name.'.json');
+    @system('QT_QPA_PLATFORM=offscreen phantomjs '.$name.'.js');
+    $ab =  json_decode(file_get_contents('/tmp/'.$name.'.json'), true);
+    $i = 0;
+    $a=[];
+    foreach ($ab as $d) {
+        $add = true;
+        if ($filter) {
+            $add = strpos(strtolower($d['title'].' '.$d['html']),$filter)!==FALSE;
+        }
+        if (!validateItem($d)) $add = false;
+        if ($add) {
+            $i++;
+            if ($i>3) break;
+            $d['title'] = $name.': ' .$d['title'];
+            $a[]=$d;
+        }
+    }
+    return $a;
+}
+
 function removeDuplicates($ab) {
     $a = [];
     foreach ($ab as $d) {
-        if (!validateItem($d)) continue;
+
         $a[$d['link']] = $d;
     }
     return $a;
