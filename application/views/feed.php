@@ -3,7 +3,7 @@
     <id>http://magemore.com/feed/</id>
     <title>atom</title>
     <updated><?=$a[0]['date']?></updated>
-    <link rel="self" href="http://magemore.com/atom.php" hreflang="en-us"/>
+    <link rel="self" href="http://magemore.com/feed/" hreflang="en-us"/>
     <?php foreach ($a as $d): ?>
         <entry>
             <id><?=$d['id']?></id>
