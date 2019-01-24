@@ -33,7 +33,7 @@ $date = (new DateTime())->format('Y-m-d\TH:i:sP');
     <id>http://magemore.com/rss.php</id>
     <title>rss</title>
     <updated><?=$date?></updated>
-    <link rel="self" href="http://magemore.com/test.atom" hreflang="en-us"/>
+    <link rel="self" href="http://magemore.com/rss.php hreflang="en-us"/>
     <?php foreach ($a as $d): ?>
     <entry>
         <id><?=$d['link']?></id>
