@@ -32,7 +32,7 @@ class Cron extends CI_Controller {
             if (!$this->validateItem($d)) $add = false;
             if ($add) {
                 $i++;
-//                if ($i>3) break;
+                if ($i>10) break;
                 $d['title'] = $name.': ' .$d['title'];
                 $a[]=$d;
             }
