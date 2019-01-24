@@ -25,7 +25,10 @@ function removeDuplicates($ab) {
     return $a;
 }
 $a = [];
-foreach (['freelancer_tag_yii','freelancer_search_yii', 'freelancer_search_psd_html'] as $name) {
+foreach ([
+        'freelancer_tag_yii','freelancer_search_yii',
+        'freelancer_tag_opencart','freelancer_search_opencart',
+             'freelancer_search_psd_html'] as $name) {
     $a = array_merge($a, getFeedData($name));
 }
 $a = removeDuplicates($a);
