@@ -1,17 +1,22 @@
 <?php
 header('Content-type: application/atom+xml');
-function getFeedData($name, $filter='') {
+function getFeedData($name, $filter) {
     @unlink('/tmp/'.$name.'.json');
     @system('QT_QPA_PLATFORM=offscreen phantomjs '.$name.'.js');
     $ab =  json_decode(file_get_contents('/tmp/'.$name.'.json'), true);
     $i = 0;
     $a=[];
     foreach ($ab as $d) {
-        if ($filter != '' && strpos($d['title'].' '.$d['html'],$filter)===FALSE) continue;
-        $i++;
-        if ($i>3) break;
-        $d['title'] = $name.': ' .$d['title'];
-        $a[]=$d;
+        $add = true;
+        if ($filter) {
+            $add = strpos($d['title'].' '.$d['html'],$filter)!==FALSE;
+        }
+        if ($add) {
+            $i++;
+            if ($i>3) break;
+            $d['title'] = $name.': ' .$d['title'];
+            $a[]=$d;
+        }
     }
     return $a;
 }
@@ -42,7 +47,7 @@ foreach ([
         'freelancer_tag_yii' => 'yii','freelancer_search_yii' => 'yii',
         'freelancer_tag_opencart' => 'opencart','freelancer_search_opencart' => 'opencart',
              'freelancer_search_psd_html' => 'html'] as $name => $filter) {
-    $a = array_merge($a, getFeedData($name));
+    $a = array_merge($a, getFeedData($name, $filter));
 }
 $a = removeDuplicates($a);
 $date = (new DateTime())->format('Y-m-d\TH:i:sP');
