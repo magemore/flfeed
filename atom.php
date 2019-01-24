@@ -3,7 +3,15 @@ header('Content-type: application/atom+xml');
 function getFeedData($name) {
     @unlink('/tmp/'.$name.'.json');
     @system('QT_QPA_PLATFORM=offscreen phantomjs '.$name.'.js');
-    return json_decode(file_get_contents('/tmp/'.$name.'.json'), true);
+    $ab =  json_decode(file_get_contents('/tmp/'.$name.'.json'), true);
+    $i = 0;
+    $a=[];
+    foreach ($ab as $d) {
+        $i++;
+        if ($i>3) break;
+        $a[]=$d;
+    }
+    return $a;
 }
 function validateItem($d) {
     $s = strtolower($d['title'].' '.$d['html']);
@@ -23,6 +31,9 @@ function removeDuplicates($ab) {
         $a[$d['link']] = $d;
     }
     return $a;
+}
+function htmlToText($s) {
+    return preg_replace( "/\n\s+/", "\n", rtrim(html_entity_decode(strip_tags($s))) );
 }
 $a = [];
 foreach ([
@@ -44,8 +55,8 @@ $date = (new DateTime())->format('Y-m-d\TH:i:sP');
         <id><?=$d['link']?></id>
         <title type="html"><?=$d['title']?></title>
         <updated><?=$date?></updated>
-        <link rel="alternate" href="<?=$d['link']?>"/>
-        <summary type="html"><![CDATA[<?=$d['html']?>]]></summary>
+        <link href="<?=$d['link']?>"/>
+        <summary type="html"><![CDATA[<?=htmlToText($d['html'])?>]]></summary>
         <content type="html"><![CDATA[<?=$d['html']?>]]></content>
     </entry>
     <?php endforeach; ?>
