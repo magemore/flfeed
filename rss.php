@@ -8,6 +8,8 @@ function getFeedData($name) {
 function validateItem($d) {
     $s = strtolower($d['title'].' '.$d['html']);
     if (strpos($s, 'designer') !== FALSE) return false;
+    if (strpos($s, 'redesign') !== FALSE) return false;
+    if (strpos($s, 'designing') !== FALSE) return false;
     if (strpos($s, 'angular') !== FALSE) return false;
     if (strpos($s, 'react') !== FALSE) return false;
     if (strpos($s, 'india') !== FALSE) return false;
@@ -33,7 +35,7 @@ $date = (new DateTime())->format('Y-m-d\TH:i:sP');
     <id>http://magemore.com/rss.php</id>
     <title>rss</title>
     <updated><?=$date?></updated>
-    <link rel="self" href="http://magemore.com/rss.php hreflang="en-us"/>
+    <link rel="self" href="http://magemore.com/test.atom" hreflang="en-us"/>
     <?php foreach ($a as $d): ?>
     <entry>
         <id><?=$d['link']?></id>
