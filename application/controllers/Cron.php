@@ -33,7 +33,10 @@ class Cron extends CI_Controller {
             if ($add) {
                 $i++;
                 if ($i>10) break;
-                $d['title'] = $name.': ' .$d['title'];
+                $n = str_replace('freelancer_', '',$name);
+                $n = str_replace('search_', '',$n);
+                $n = str_replace('tag_', '',$n);
+                $d['title'] = $n.': ' .$d['title'];
                 $a[]=$d;
             }
         }

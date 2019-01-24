@@ -10,7 +10,7 @@ class Feed extends CI_Controller {
     public function index()
     {
       //  @system('wget -qO- http://magemore.com/cron/ &> /dev/null &');
-
+        error_reporting(E_ERROR);
         header('Content-type: application/atom+xml');
         $this->load->database();
         $a = $this->db->order_by('id', 'DESC')->limit(30)->get('entry')->result_array();
