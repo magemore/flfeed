@@ -1,6 +1,7 @@
 var page = require('webpage').create();
 var fs = require('fs');
-var url = 'https://www.freelancer.com/jobs/?keyword=yii';
+var url = 'https://www.freelancer.com/jobs/yii/';
+// var url = 'https://www.freelancer.com/jobs/?keyword=yii';
 
 
 page.open(url, function(status) {
