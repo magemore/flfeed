@@ -8,6 +8,7 @@ function validateItem($d) {
     if (strpos($s, 'angular') !== FALSE) return false;
     if (strpos($s, 'react') !== FALSE) return false;
     if (strpos($s, 'india') !== FALSE) return false;
+    if (strpos($s, 'mumbai') !== FALSE) return false;
     if (strpos($s, 'c#') !== FALSE) return false;
     return true;
 }
@@ -48,6 +49,7 @@ $a = [];
 foreach ([
         'freelancer_tag_yii' => 'yii','freelancer_search_yii' => 'yii',
         'freelancer_tag_opencart' => 'opencart','freelancer_search_opencart' => 'opencart',
+        'freelancer_tag_woocommerce' => 'woocommerce','freelancer_search_woocommerce' => 'woocommerce',
              'freelancer_search_psd_html' => 'html'] as $name => $filter) {
     $a = array_merge($a, getFeedData($name, $filter));
 }
