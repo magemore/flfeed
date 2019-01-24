@@ -2,7 +2,7 @@
 header('Content-type: application/atom+xml');
 function getFeedData($name) {
     @unlink('/tmp/'.$name.'.json');
-    @system('QT_QPA_PLATFORM=offscreen phantomjs '$name'.js');
+    @system('QT_QPA_PLATFORM=offscreen phantomjs '.$name.'.js');
     return json_decode(file_get_contents('/tmp/'.$name.'.json'), true);
 }
 $a = [];
