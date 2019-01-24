@@ -1,8 +1,6 @@
 var page = require('webpage').create();
 var fs = require('fs');
 var url = 'https://www.freelancer.com/jobs/yii/';
-// var url = 'https://www.freelancer.com/jobs/?keyword=yii';
-
 
 page.open(url, function(status) {
     if (status !== 'success') {
@@ -20,10 +18,8 @@ page.open(url, function(status) {
                 return r;
             });
             var r = JSON.stringify(a);
-            fs.write('/tmp/freelancer.json', r, 'w');
-            // console.log(r);
+            fs.write('/tmp/freelancer_tag_yii.json', r, 'w');
             phantom.exit();
         }
     }
-
 });
