@@ -35,10 +35,10 @@ $a = removeDuplicates($a);
 $date = (new DateTime())->format('Y-m-d\TH:i:sP');
 ?><?xml version = "1.0" encoding = "UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://magemore.com/rss.php</id>
-    <title>rss</title>
+    <id>http://magemore.com/atom.php</id>
+    <title>atom</title>
     <updated><?=$date?></updated>
-    <link rel="self" href="http://magemore.com/test.atom" hreflang="en-us"/>
+    <link rel="self" href="http://magemore.com/atom.php" hreflang="en-us"/>
     <?php foreach ($a as $d): ?>
     <entry>
         <id><?=$d['link']?></id>
