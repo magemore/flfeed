@@ -11,7 +11,7 @@ class Feed extends CI_Controller {
     {
         header('Content-type: application/atom+xml');
         $this->load->database();
-        $a = $this->db->order_by('id', 'DESC')->limit(200)->get('entry')->result_array();
+        $a = $this->db->order_by('id', 'DESC')->limit(10)->get('entry')->result_array();
         foreach ($a as $i => $d) {
             $d['date'] = (new DateTime($d['created_at']))->format('Y-m-d\TH:i:sP');
             $d['summary'] = $this->htmlToText($d['html']);
