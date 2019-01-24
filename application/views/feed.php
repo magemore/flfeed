@@ -6,7 +6,7 @@
     <link rel="self" href="http://magemore.com/atom.php" hreflang="en-us"/>
     <?php foreach ($a as $d): ?>
         <entry>
-            <id><?=$d['link']?></id>
+            <id><?=$d['id']?></id>
             <title type="html"><?=$d['title']?></title>
             <updated><?=$d['date']?></updated>
             <link href="<?=$d['link']?>"/>
