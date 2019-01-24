@@ -2,6 +2,11 @@
 
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+//echo $_SERVER['REQUEST_URI']; exit();
+if ($_SERVER['REQUEST_URI']=='/feed.atom') {
+    $_SERVER['REQUEST_URI'] = '/feed/';
+}
+
 
 switch (ENVIRONMENT)
 {
